@@ -24,6 +24,17 @@ with st.sidebar:
     st.subheader("this application is made for learning machine model")
     st.caption("Choose  your parameter here to work on the application ")
     choose =st.radio("choose your options ",["Dataset","Analysis","Training","Download"])
+    selected_data = st.sidebar.selectbox('Select a dataset', data().dataset_id)
+    title_data = data()[ data()['dataset_id'] == selected_data]['title']
+
+    st.header('Datasets')
+    st.subheader('List of dataset')
+    with st.expander('Show list of dataset'):
+       st.write(data())
+
+    st.subheader(f'Selected data (`{selected_data}`)')
+    st.info(title_data)
+    st.write(data(selected_data))
     
     
     
