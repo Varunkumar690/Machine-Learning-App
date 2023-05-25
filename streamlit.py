@@ -23,8 +23,8 @@ with st.sidebar:
     st.header("welcome to pycaret")
     st.subheader("this application is made for learning machine model")
     st.caption("Choose  your parameter here to work on the application ")
-    choose =st.radio("choose your options ",["Dataset","Analysis","Training","Download"])
-if choose=="prebuild dataset":
+    choose =st.radio("choose your options ",["Dataset","Analysis","Training","Download","Prebuild dataset"])
+if choose=="Prebuild dataset":
     selected_data = st.sidebar.selectbox('Select a dataset', data().dataset_id)
     title_data = data()[ data()['dataset_id'] == selected_data]['title']
 
