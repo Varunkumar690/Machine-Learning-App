@@ -12,6 +12,20 @@ from streamlit_pandas_profiling import st_profile_report
 import pycaret
 from pycaret.classification import setup,compare_models,pull,save_model,ClassificationExperiment
 from pycaret.regression import setup,compare_models,pull,save_model,RegressionExperiment
+st.title('🎈 pydataset')
+
+selected_data = st.sidebar.selectbox('Select a dataset', data().dataset_id)
+title_data = data()[ data()['dataset_id'] == selected_data]['title']
+
+st.header('Datasets')
+st.subheader('List of dataset')
+with st.expander('Show list of dataset'):
+    st.write(data())
+
+st.subheader(f'Selected data (`{selected_data}`)')
+st.info(title_data)
+st.write(data(selected_data))
+
 
 st.title("Machine Learning App using pycaret")
 
@@ -24,18 +38,6 @@ with st.sidebar:
     st.subheader("this application is made for learning machine model")
     st.caption("Choose  your parameter here to work on the application ")
     choose =st.radio("choose your options ",["Prebuild dataset","Dataset","Analysis","Training","Download"])
-if choose=="prebuild dataset":
-    selected_data = st.sidebar.selectbox('Select a dataset',data().dataset_id)
-    
-    st.header('Datasets')
-    st.subheader('List of dataset')
-    with st.expander('Show list of dataset'):
-        st.write(data())
-    st.subheader(f'Selected data(`{selected_data}`)')
-    st.write(data(selected_data))
-   
-    
-    
     
 if choose=="Dataset":
     st.write("Please upload your dataset here")
