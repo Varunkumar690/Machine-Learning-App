@@ -20,7 +20,8 @@ if os.path.exists("source.csv"):
     
 
 with st.sidebar:
-    st.header("welcome to pycaret")
+    st.image("https://builtin.com/sites/www.builtin.com/files/styles/og/public/2021-12/machine-learning-examples-applications.png")
+    st.header("Automated Machine Learning application")
     st.subheader("this application is made for learning machine model")
     st.caption("Choose  your parameter here to work on the application ")
     choose =st.radio("choose your options ",["Dataset","Analysis","Training","Download"])
