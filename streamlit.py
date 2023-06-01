@@ -22,9 +22,9 @@ st.subheader('List of dataset')
 with st.expander('Show list of dataset'):
     st.write(data())
 
-st.subheader(f'Selected data (`{selected_data}`)')
-st.info(title_data)
-st.write(data(selected_data))
+    st.subheader(f'Selected data (`{selected_data}`)')
+    st.info(title_data)
+    st.write(data(selected_data))
 
 
 st.title("Machine Learning App using pycaret")
