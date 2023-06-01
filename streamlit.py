@@ -13,7 +13,7 @@ import pycaret
 from pycaret.classification import setup,compare_models,pull,save_model,ClassificationExperiment
 from pycaret.regression import setup,compare_models,pull,save_model,RegressionExperiment
 
-st.title("Machine Learning App using pycaret")
+st.title("Machine Learning App")
 
 if os.path.exists("source.csv"):
     df = pd.read_csv("source.csv",index_col=None)
@@ -22,9 +22,9 @@ if os.path.exists("source.csv"):
 with st.sidebar:
     st.image("https://builtin.com/sites/www.builtin.com/files/styles/og/public/2021-12/machine-learning-examples-applications.png")
     st.header("Automated Machine Learning application")
-    st.subheader("this application is made for learning machine model")
-    st.caption("Choose  your parameter here to work on the application ")
-    choose =st.radio("choose your options ",["Dataset","Analysis","Training","Download"])
+    st.subheader("This Application Is Made For Learning Machine Model")
+    st.caption("Choose Your Parameter Here To Work On The Application ")
+    choose =st.radio("Choose your options ",["Dataset","Analysis","Training","Download"])
     
 if choose=="Dataset":
     st.write("Please upload your dataset here")
@@ -36,7 +36,7 @@ if choose=="Dataset":
         st.dataframe(df)
         
 if choose=="Analysis":
-    st.subheader("perform profiling on dataset")
+    st.subheader("Perform profiling on dataset")
     if st.sidebar.button("Do Analysis"):
         profile_report=df.profile_report()
         st_profile_report(profile_report)
