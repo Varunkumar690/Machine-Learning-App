@@ -25,8 +25,8 @@ with st.sidebar:
     st.header("Automated Machine Learning application")
     st.subheader("This Application Is Made For Learning Machine Model")
     st.caption("Choose Your Parameter Here To Work On The Application ")
-    choose =st.radio("Choose your options ",["Dataset","Analysis","Training","Download"])
-if choose=="Dataset":
+    choose =st.radio("Choose your options ",["Sample_Dataset","Dataset","Analysis","Training","Download"])
+if choose=="Sample_Dataset":
     st.write("Please upload your dataset here. Only .csv files allowed")
     Available_Datasets=[filename for filename in os.listdir()if filename.endswith('.csv')]
     selected_Datasets=st.selectbox('Select Datasets',Available_Datasets)
@@ -37,7 +37,15 @@ if choose=="Dataset":
         st.dataframe(df)
         st.success('Dataset Suessfully Loaded')
     else:
-        st.error('Error: No Dataset Avaialble')    
+        st.error('Error: No Dataset Avaialble')
+if choose=="Dataset":
+    st.write("Please upload your dataset here")
+    dataset_values= st.file_uploader("Upload here")
+    
+    if dataset_values:
+        df = pd.read_csv(dataset_values, index_col=None)
+        df.to_csv("source.csv",index =None)
+        st.dataframe(df)        
 
 
         
