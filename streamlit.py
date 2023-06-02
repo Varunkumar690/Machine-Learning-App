@@ -50,40 +50,38 @@ if choose=="Analysis":
         st_profile_report(profile_report
     
     
-if choose=="Training":    
-    st.header("Start Training Your Model Now")
-    choice =st.sidebar.selectbox("Select Your Techniques:",["Classification","Regression"])
-    target = st.selectbox("Select You Target Variable ",df.columns)
-    if choice == "Classification":
-        if st.sidebar.button("Classification Train"):
-            s1=ClassificationExperiment()
-            s1.setup(data=df,target=target)
-        
-            setup_df=s1.pull()
-            
-            st.info("The setup data is as follows:")
+if choose=="Training":
+    st.write("Start Training your Model now. Please choose classification or regression based on your model parameters.")
+    target = st.selectbox("Select you Target Variable",df.columns)
+    choice = st.selectbox("Select your Technique:", ["Classification","Regression"])
+    if choice=="Classification":
+        if st.button("Classification Train"):
+            s1 = ClassificationExperiment()
+            s1.setup(data=df, target=target)
+            setup_df = s1.pull()
+            st.info("The Setup data is as follows:")
             st.table(setup_df)
             
-            best_model1=s1.compare_models()
-            compare_model=s1.pull()
-            st.info("The comparison  of models is as follows:")
+            best_model1 = s1.compare_models()
+            compare_model = s1.pull()
+            st.info("The Comparison of models is as folows:")
             st.table(compare_model)
+            
             best_model1
             s1.save_model(best_model1,"Machine Learning Model")
     else:
-        if st.sidebar.button("Regression Train"):
-            s2=RegressionExperiment()
-            s2.setup(data=df,target=target)
-            
-            setup_df=s2.pull()
-            
-            st.info("The setup data is as follows:")
+        if st.button("Regression Train"):
+            s2 = RegressionExperiment()
+            s2.setup(data=df, target=target)
+            setup_df = s2.pull()
+            st.info("The Setup data is as follows:")
             st.table(setup_df)
-                 
-            best_model2=s2.compare_models()
-            compare_model=s2.pull()
-            st.info("The comparison  of models is as follows:")
+            
+            best_model2 = s2.compare_models()
+            compare_model = s2.pull()
+            st.info("The Comparison of models is as folows:")
             st.table(compare_model)
+            
             best_model2
             s2.save_model(best_model2,"Machine Learning Model")
             
