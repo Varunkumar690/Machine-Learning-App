@@ -12,7 +12,7 @@ from streamlit_pandas_profiling import st_profile_report
 import pycaret
 from pycaret.classification import setup,compare_models,pull,save_model,ClassificationExperiment
 from pycaret.regression import setup,compare_models,pull,save_model,RegressionExperiment
-from pydataset import data
+
 
 st.title("Machine Learning App")
 
@@ -25,28 +25,21 @@ with st.sidebar:
     st.header("Automated Machine Learning application")
     st.subheader("This Application Is Made For Learning Machine Model")
     st.caption("Choose Your Parameter Here To Work On The Application ")
-    choose =st.radio("Choose your options ",["Pre-loaded","Dataset","Analysis","Training","Download"])
-if choose == "Pre-loaded":
-    st.title('Pydataset')
-
-    selected_data = st.sidebar.selectbox('Select a dataset', data().dataset_id)
-
-
-    st.header('Datasets')
-    st.subheader('List of dataset')
-    with st.expander('Show list of dataset'):
-        st.write(data())
-        
-    st.subheader(f'Selected data(`{selected_data}`)')  
-    st.write(data(selected_data))    
+    choose =st.radio("Choose your options ",["Dataset","Analysis","Training","Download"])
 if choose=="Dataset":
-    st.write("Please upload your dataset here")
-    dataset_values= st.file_uploader("Upload here")
+    st.write("Please upload your dataset here. Only .csv files allowed")
+    Available_Datasets=[filename for filename in os.listdir()if filename.endswith('.csv')]
+    selected_Datasets=st.selectbox('Select Datasets',Available_Datasets)
     
-    if dataset_values:
-        df = pd.read_csv(dataset_values, index_col=None)
-        df.to_csv("source.csv",index =None)
+    if selected_Datasets:
+        df=pd.read_csv(selected_Datasets,index_col=None)
+        df.to_csv("sourcev.csv", index = None)
         st.dataframe(df)
+        st.success('Dataset Suessfully Loaded')
+    else:
+        st.error('Error: No Dataset Avaialble')    
+
+
         
 if choose=="Analysis":
     st.subheader("Perform profiling on dataset")
@@ -58,16 +51,16 @@ if choose=="Analysis":
 if choose=="Training":    
     st.header("Start Training Your Model Now")
     choice =st.sidebar.selectbox("Select Your Techniques:",["Classification","Regression"])
-    target = st.selectbox("Select You Target Variable ",df.columns,selected_data.columns)
+    target = st.selectbox("Select You Target Variable ",df.columns)
     if choice == "Classification":
         if st.sidebar.button("Classification Train"):
             s1=ClassificationExperiment()
             s1.setup(data=df,target=target)
-            s1.setup(data=selected_data,target=target)
+        
             setup_df=s1.pull()
-            setup_selected_data=s1.pull()
+            
             st.info("The setup data is as follows:")
-            st.table(setup_df,setup_selected_data)
+            st.table(setup_df)
             
             best_model1=s1.compare_models()
             compare_model=s1.pull()
@@ -79,11 +72,11 @@ if choose=="Training":
         if st.sidebar.button("Regression Train"):
             s2=RegressionExperiment()
             s2.setup(data=df,target=target)
-            s2.setup(data=selected_data,target=target)
+            
             setup_df=s2.pull()
-            setup_selected_data=s2.pull()
+            
             st.info("The setup data is as follows:")
-            st.table(setup_df,setup_selected_data)
+            st.table(setup_df)
                  
             best_model2=s2.compare_models()
             compare_model=s2.pull()
@@ -96,5 +89,3 @@ if choose=="Download":
     with open("Machine Learning Model.pkl","rb") as f:
         st.caption("Download your model from here:")
         st.download_button("download the file ", f ,"Machine Learning Model.pkl")
-        
-    
