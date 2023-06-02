@@ -31,13 +31,14 @@ if choose=="Dataset":
     Available_Datasets=[filename for filename in os.listdir()if filename.endswith('.csv')]
     selected_Datasets=st.selectbox('Select Datasets',Available_Datasets)
     
-if selected_Datasets:
-    df=pd.read_csv(selected_Datasets,index_col=None)
-    df.to_csv("sourcev.csv", index = None)
-    st.dataframe(df)
-    st.success('Dataset Suessfully Loaded')
- else:
-    st.error('Error: No Dataset Avaialble')
+    if selected_Datasets:
+        df=pd.read_csv(selected_Datasets,index_col=None)
+        df.to_csv("sourcev.csv", index = None)
+        st.dataframe(df)
+        st.success('Dataset Successfully Loaded')
+    else:
+        st.error('Error: No Dataset Avaialble')
+
 
 
         
