@@ -43,10 +43,11 @@ if choose=="Dataset":
 
         
 if choose=="Analysis":
-    st.subheader("Perform profiling on dataset")
-    if st.sidebar.button("Do Analysis"):
-        profile_report=df.profile_report()
-        st_profile_report(profile_report)
+    st.write("Performing profiling on uploaded Dataset using pandas_profiling.")
+    if st.button("Do Analysis"):
+        st.header('Perform Analysis on Data:')
+        profile_report = df.profile_report() 
+        st_profile_report(profile_report
     
     
 if choose=="Training":    
