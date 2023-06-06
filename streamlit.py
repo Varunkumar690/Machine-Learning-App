@@ -21,14 +21,14 @@ if os.path.exists("sourcev.csv"):
 
 with st.sidebar:
     st.image("https://builtin.com/sites/www.builtin.com/files/styles/og/public/2021-12/machine-learning-examples-applications.png") 
-    st.header(":violet[Welcome to the Application!]")
-    st.subheader(":green[This is made for learning machine models. You can do both classification and regression analysis here.]")
+    st.header(":cyan[Welcome to the Application!]")
+    st.subheader(":silver[This is made for learning machine models. You can do both classification and regression analysis here.]")
     st.caption("**:red[Choose your parameters below to work on the application.]**")
     choose=st.radio(":coffee:",['Dataset','Analysis','Training','Download'])
     st.info("I have made this application which helps in building automated machine learning models using **:red[_streamlit, pandas, pandas_profiling(for EDA) and pycaret library._]** Hope ypu like it! :)")
     
 if choose=="Dataset":
-    st.write(":blue[_Please upload your dataset here. Only :red[.csv files] allowed_]")
+    st.write(":red[_Please upload your dataset here. Only :red[.csv files] allowed_]")
     Available_Datasets=[filename for filename in os.listdir()if filename.endswith('.csv')]
     selected_Datasets=st.selectbox(':brown[Select Datasets]',Available_Datasets)
     
@@ -41,14 +41,14 @@ if choose=="Dataset":
         st.error('**_Error: No Dataset Avaialble_**')
 
 if choose=="Analysis":
-    st.write(":green[**_Performing profiling on uploaded Dataset using pandas_profiling._**]")
+    st.write(":white[**_Performing profiling on uploaded Dataset using pandas_profiling._**]")
     if st.button("Do Analysis"):
         st.header('Perform Analysis on Data:')
         profile_report = df.profile_report() 
         st_profile_report(profile_report)
 
 if choose=="Training":
-    st.write(":blue[**_Start Training your Model now. Please choose **:green[classification]** or **:red[regression]** based on your model parameters._**]")
+    st.write(":green[**_Start Training your Model now. Please choose **:green[classification]** or **:red[regression]** based on your model parameters._**]")
     target = st.selectbox(":green[Select you Target Variable:]",df.columns)
     choice = st.selectbox(":blue[Select your Technique:]", ["Classification","Regression"])
     if choice=="Classification":
