@@ -20,7 +20,7 @@ if os.path.exists("sourcev.csv"):
     df = pd.read_csv("sourcev.csv",index_col=None)
 
 with st.sidebar:
-     st.image("https://builtin.com/sites/www.builtin.com/files/styles/og/public/2021-12/machine-learning-examples-applications.png") 
+    st.image("https://builtin.com/sites/www.builtin.com/files/styles/og/public/2021-12/machine-learning-examples-applications.png") 
     st.header(":violet[Welcome to the Application!]")
     st.subheader(":green[This is made for learning machine models. You can do both classification and regression analysis here.]")
     st.caption("**:red[Choose your parameters below to work on the application.]**")
